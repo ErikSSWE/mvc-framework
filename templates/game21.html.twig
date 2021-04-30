@@ -1,25 +1,39 @@
+<!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8">
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="../style/style.css" /> 
+        {% endblock %}
+    </head>
+<header>
     {% include 'includes/header.html.twig' %}
+</header>
+<body>
+    <div class="dice">
+        <form method="POST" action=" {{ url('dice') }} ">
+            <label for="howManyDices">How many dices?<br></label>
+            <input name="howManyDices" type="number" min="1" max="2" value="{{ howManyDices }}">
+            <label for="howManySides"><br>How many sides?<br></label>
+            <input name="howManySides" type="number" min="1" value="{{ howManySides }}">
+            <br>
+            <input type="submit" name="action" value="start">
+            <input type="submit" name="action" value="restart">
+            <input type="submit" name="action" value="roll">
+            <input type="submit" name="action" value="computer">
+            <input type="submit" name="action" value="end">
+        </form>
 
-    <form method="POST" action=" {{ url('dice') }} ">
-        <label for="howManyDices">How many dices?<br></label>
-        <input name="howManyDices" type="number" min="1" max="2" value="{{ howManyDices }}">
-        <label for="howManySides"><br>How many sides?<br></label>
-        <input name="howManySides" type="number" min="1" value="{{ howManySides }}">
-        <br>
-        <input type="submit" name="action" value="start">
-        <input type="submit" name="action" value="restart">
-        <input type="submit" name="action" value="roll">
-        <input type="submit" name="action" value="computer">
-        <input type="submit" name="action" value="end">
-    </form>
 
+        <p> playerScore: {{ playerScore }} </p>
+        <p> computerScore: {{ computerScore }} </p>
 
-    <p> playerScore: {{ playerScore }} </p>
-    <p> computerScore: {{ computerScore }} </p>
+        <h2> Spelare: {{ playerGames }} | Dator: {{ computerGames }}</h2>
+    </div>
+    <div class ="footer">
+        {% include 'includes/footer.html.twig' %}
+    </div>
+</body>
 
-    <h2> Spelare: {{ playerGames }} | Dator: {{ computerGames }}</h2>
-
-    {% include 'includes/footer.html.twig' %}
 
 </html>

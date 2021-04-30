@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App\Dice;
 
 use App\Dice\DiceHand;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class GameOf21
 {
     protected $diceHand = null;
+
+    protected $session = null;
 
     protected $playerScore = 0;
 
@@ -20,17 +23,23 @@ class GameOf21
 
     public function __construct()
     {
+        $this->session = new Session();
+        //echo "test:::" . $this->session->get('test');
+        $this->session->set('test', +1);
+        //echo "test:::" . $this->session->get('test');
 
-        if (empty($_SESSION["playerGames"])) {
-            $_SESSION["playerGames"] = 0;
+
+
+        if (empty($this->session->get('playerGames'))) {
+            $this->session->set('playerGames', 0);
         }
 
-        if (empty($_SESSION["howManySides"])) {
-            $_SESSION["howManySides"] = 6;
+        if (empty($this->session->get('howManySides'))) {
+            $this->session->set('howManySides', 6);
         }
 
-        if (empty($_SESSION["howManyDices"])) {
-            $_SESSION["howManyDices"] = 2;
+        if (empty($this->session->get('howManyDices'))) {
+            $this->session->set('howManyDices', 2);
         }
 
         $action = strtolower($_POST["action"] ?? "");
@@ -45,13 +54,13 @@ class GameOf21
                 $this->initGame();
                 break;
             case 'end':
-                $_SESSION["computerGames"] = 0;
-                $_SESSION["playerGames"] = 0;
+                $this->session->set('computerGames', 0);
+                $this->session->set('playerGames', 0);
                 $this->initGame();
                 break;
             case 'computer':
                 $this->continueGame();
-                while ($_SESSION["computerScore"] < 21 && $_SESSION["computerScore"] < $_SESSION["playerScore"]) {
+                while ($this->session->get('computerScore') < 21 && $this->session->get('computerScore') < $this->session->get('playerScore')) {
                     $this->computerRoll();
                 }
                 $this->correct();
@@ -64,49 +73,66 @@ class GameOf21
 
     public function correct()
     {
-        if ($_SESSION["playerScore"] > 21) {
-            //echo "<h2> Full! Dator Vinner </h2>";
-            $_SESSION["computerGames"] += 1;
-        } elseif ($_SESSION["computerScore"] <= 21 && $_SESSION["computerScore"] > $_SESSION["playerScore"]) {
+        if ($this->session->get('playerScore') > 21) {
+
+            $score = 1;
+            $this->addValueToSessionVar('computerGames', $score);
+        } elseif ($this->session->get('computerScore') <= 21 && $this->session->get('computerScore') > $this->session->get('playerScore')) {
             //echo "<h2> Dator Vinner! </h2>";
-            $_SESSION["computerGames"] += 1;
-        } elseif ($_SESSION["playerScore"] <= 21 && $_SESSION["computerScore"] < $_SESSION["playerScore"]) {
+            $score = 1;
+            $this->addValueToSessionVar('computerGames', $score);
+
+        } elseif ($this->session->get('playerScore') <= 21 && $this->session->get('computerScore') < $this->session->get('playerScore')) {
             //echo "<h2> Spelare Vinner! </h2>";
-            $_SESSION["playerGames"] += 1;
-        } elseif ($_SESSION["computerScore"] == $_SESSION["playerScore"] && $_SESSION["playerScore"] <= 21) {
+            $score = 1;
+            $this->addValueToSessionVar('playerScore', $score);
+
+        } elseif ($this->session->get('computerScore') == $this->session->get('playerScore') && $this->session->get('playerScore') <= 21) {
             //echo "<h2> Lika, Dator Vinner! </h2>";
-            $_SESSION["computerGames"] += 1;
-        } elseif ($_SESSION["computerScore"] > 21 && $_SESSION["playerScore"] <= 21) {
+            $score = 1;
+            $this->addValueToSessionVar('computerGames', $score);
+
+        } elseif ($this->session->get('computerScore') > 21 && $this->session->get('playerScore') <= 21) {
             //echo "<h2> Dator Full!, Spelare Vinner! </h2>";
-            $_SESSION["playerGames"] += 1;
+            $score = 1;
+            $this->addValueToSessionVar('playerGames', $score);
         }
     }
 
     public function initGame()
     {
-        $_SESSION["playerScore"] = 0;
-        $_SESSION["computerScore"] = 0;
-        $_SESSION["howManyDices"] = (int)$_POST["howManyDices"] ?? 2;
-        $_SESSION["howManySides"] = (int)$_POST["howManySides"] ?? 6;
-        $this->diceHand = new DiceHand($_SESSION["howManyDices"], $_SESSION["howManySides"]);
+        $this->session->set('playerScore', 0);
+        $this->session->set('computerScore', 0);
+        $this->session->set('howManyDices', (int)$_POST["howManyDices"] ?? 2);
+        $this->session->set('howManySides', (int)$_POST["howManySides"] ?? 6);
+        $this->diceHand = new DiceHand($this->session->get('howManyDices'), $this->session->get('howManySides'));
     }
 
     public function continueGame()
     {
         $this->diceHand = new DiceHand(
-            (int)$_SESSION["howManyDices"] ?? 2,
-            (int)$_SESSION["howManySides"] ?? 6
+            (int)$this->session->get('howManyDices') ?? 2,
+            (int)$this->session->get('howManySides') ?? 6
         );
     }
 
     public function playerRoll()
     {
-        $_SESSION["playerScore"] += $this->diceHand->rollDices();
+        $roll = $this->diceHand->rollDices();
+        $this->addValueToSessionVar('playerScore', $roll);
+    }
+
+    public function addValueToSessionVar($name, $value)
+    {
+        $val = $this->session->get($name);
+        $newVal = $val += $value;
+        $newVal = $this->session->set($name, $newVal);
     }
 
     public function computerRoll()
     {
-        $_SESSION["computerScore"] += $this->diceHand->rollDices();
+        $roll = $this->diceHand->rollDices();
+        $this->addValueToSessionVar('computerScore', $roll);
     }
 
 
@@ -115,12 +141,12 @@ class GameOf21
         return [
             "header" => "Game21 page",
             "message" => "Test, player!",
-            "howManyDices" => $_SESSION["howManyDices"] ?? 1,
-            "howManySides" => $_SESSION["howManySides"] ?? 6,
-            "playerScore" => $_SESSION["playerScore"] ?? 0,
-            "computerScore" => $_SESSION["computerScore"] ?? 0,
-            "playerGames" => $_SESSION["playerGames"] ?? 0,
-            "computerGames" => $_SESSION["computerGames"] ?? 0,
+            "howManyDices" => $this->session->get('howManyDices') ?? 1,
+            "howManySides" => $this->session->get('howManySides') ?? 6,
+            "playerScore" => $this->session->get('playerScore') ?? 0,
+            "computerScore" => $this->session->get('computerScore') ?? 0,
+            "playerGames" => $this->session->get('playerGames') ?? 0,
+            "computerGames" => $this->session->get('computerGames') ?? 0,
         ];
     }
 }
