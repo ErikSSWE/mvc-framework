@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 0em;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 40px auto auto auto 40px;
+    grid-template-rows: 40px auto auto auto 40px;
+    min-height: 100%;
+}
+
+.dice {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    padding: 10px;
+}
+
+.yatzy {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    padding: 10px;
+}
+
+.score {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+}
+
+.navbar {
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    min-height: 40px;
+    text-decoration: none;
+    background-color: lightgrey;
+}
+
+.nav a {
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav a:hover {
+    text-decoration: none;
+    color: blue;
+}
+
+.footer {
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 5;
+    grid-row-end: 5;
+    background-color: lightgrey;
+}

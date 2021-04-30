@@ -5,3 +5,7 @@ index:
 dice:
     path: /dice
     controller: App\Controller\DiceController::GameOf21
+
+yatzy:
+    path: /yatzy
+    controller: App\Controller\YatzyController::Yatzy

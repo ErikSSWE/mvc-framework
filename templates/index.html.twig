@@ -3,20 +3,25 @@
     <head>
         <meta charset="UTF-8">
         {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="../style/style.css" /> 
+        <link rel="stylesheet" type="text/css" href="../style/index.css" /> 
         {% endblock %}
     </head>
     <body>
         {% include 'includes/header.html.twig' %}
-        <h1 class="test"> Index </h1>
+        <h1 class="title"> Index </h1>
+        
+        <p class="mini-text"> Detta är homepage, Jag använder mig av symfony ramverk.</p>
 
-        <p> Detta är homepage, Jag använder mig av symfony ramverk.</p>
+        <div class="content">
+            <ul> Några sidor som finns:
+                <li>
+                    <a href = {{ url("dice") }} >Dice<a/>
+                </li>
+            </ul>
+        </div>
 
-        <ul> Några sidor som finns:
-            <li>
-                <a href = {{ url("dice") }} >Dice<a/>
-            </li>
+        <div class="footer">
+            {% include 'includes/footer.html.twig' %}
+        </div>
     </body>
-
-    {% include 'includes/footer.html.twig' %}
 </html>

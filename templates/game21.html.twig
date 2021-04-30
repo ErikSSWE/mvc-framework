@@ -3,13 +3,11 @@
     <head>
         <meta charset="UTF-8">
         {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="../style/style.css" /> 
+        <link rel="stylesheet" type="text/css" href="../style/dice.css" /> 
         {% endblock %}
     </head>
-<header>
-    {% include 'includes/header.html.twig' %}
-</header>
 <body>
+    {% include 'includes/header.html.twig' %}
     <div class="dice">
         <form method="POST" action=" {{ url('dice') }} ">
             <label for="howManyDices">How many dices?<br></label>
@@ -24,12 +22,14 @@
             <input type="submit" name="action" value="end">
         </form>
 
-
         <p> playerScore: {{ playerScore }} </p>
         <p> computerScore: {{ computerScore }} </p>
+    </div>
 
+    <div class="score">
         <h2> Spelare: {{ playerGames }} | Dator: {{ computerGames }}</h2>
     </div>
+
     <div class ="footer">
         {% include 'includes/footer.html.twig' %}
     </div>
