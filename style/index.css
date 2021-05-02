@@ -3,8 +3,6 @@ body {
     min-height: 0em;
     height: 100%;
     display: grid;
-    grid-template-columns: 40px auto auto auto 40px;
-    grid-template-rows: 40px auto auto auto 40px;
     min-height: 100%;
 }
 

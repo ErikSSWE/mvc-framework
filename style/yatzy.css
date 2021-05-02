@@ -45,14 +45,16 @@ body {
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 2;
+
 }
 
 .dices {
-    padding: 5px;
+    padding: 10px;
     grid-column-start: 3;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 2;
+    min-height: 51em;
 }
 
 .score {
