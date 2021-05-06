@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<title>Hello BookController!</title>
-
+<title>Book</title>
+<head>
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="../style/index.css" /> 
+    {% endblock %}
+</head>
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
+
+{% include 'includes/header.html.twig' %}
 <div class="example-wrapper">
     <h1>Books</h1>
 
@@ -20,9 +23,12 @@
         <ul> Författare </ul>
         <li>{{ book.writer }}</li>
         <ul> Bild: </ul>
-        <li>{{ book.img }}</li>
+        <img src="../{{ book.img }}" width="200" height="400">
 
     {% endfor %}
 </ul>
 </div>
 {% endblock %}
+<div class ="footer">
+    {% include 'includes/footer.html.twig' %}
+</div>
