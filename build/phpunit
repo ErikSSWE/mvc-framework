@@ -1,11 +1,44 @@
 PHPUnit 9.5.4 by Sebastian Bergmann and contributors.
 
-........                                                            8 / 8 (100%)
+...EEEEE                                                            8 / 8 (100%)
 
-Time: 00:00.102, Memory: 16.00 MB
+Time: 00:00.121, Memory: 16.00 MB
 
-OK (8 tests, 8 assertions)
+There were 5 errors:
 
-Generating code coverage report in Clover XML format ... done [00:00.069]
+1) App\Yatzy\YatzyTest::testConstruct2
+ArgumentCountError: Too few arguments to function App\Yatzy\YatzyGame::__construct(), 0 passed in /home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php on line 18 and exactly 1 expected
 
-Generating code coverage report in HTML format ... done [00:00.039]
+/home/erik/dbwebb-kurser/mvc/me/orm/app/src/Yatzy/YatzyGame.php:42
+/home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php:18
+
+2) App\Yatzy\YatzyTest::testConstruct3
+ArgumentCountError: Too few arguments to function App\Yatzy\YatzyGame::__construct(), 0 passed in /home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php on line 34 and exactly 1 expected
+
+/home/erik/dbwebb-kurser/mvc/me/orm/app/src/Yatzy/YatzyGame.php:42
+/home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php:34
+
+3) App\Yatzy\YatzyTest::testConstruct1
+ArgumentCountError: Too few arguments to function App\Yatzy\YatzyGame::__construct(), 0 passed in /home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php on line 50 and exactly 1 expected
+
+/home/erik/dbwebb-kurser/mvc/me/orm/app/src/Yatzy/YatzyGame.php:42
+/home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php:50
+
+4) App\Yatzy\YatzyTest::testConstruct4
+ArgumentCountError: Too few arguments to function App\Yatzy\YatzyGame::__construct(), 0 passed in /home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php on line 61 and exactly 1 expected
+
+/home/erik/dbwebb-kurser/mvc/me/orm/app/src/Yatzy/YatzyGame.php:42
+/home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php:61
+
+5) App\Yatzy\YatzyTest::testConstructCaseStarta
+ArgumentCountError: Too few arguments to function App\Yatzy\YatzyGame::__construct(), 0 passed in /home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php on line 72 and exactly 1 expected
+
+/home/erik/dbwebb-kurser/mvc/me/orm/app/src/Yatzy/YatzyGame.php:42
+/home/erik/dbwebb-kurser/mvc/me/orm/app/test/Yatzy/YatzyTest.php:72
+
+ERRORS!
+Tests: 8, Assertions: 3, Errors: 5.
+
+Generating code coverage report in Clover XML format ... done [00:00.106]
+
+Generating code coverage report in HTML format ... done [00:00.067]

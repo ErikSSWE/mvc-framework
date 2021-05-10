@@ -9,3 +9,11 @@ dice:
 yatzy:
     path: /yatzy
     controller: App\Controller\YatzyController::Yatzy
+
+highscore:
+    path: /highscore
+    controller: App\Controller\HighscoreController::index
+
+new:
+    path: /new
+    controller: App\Controller\HighscoreController::new
